@@ -24,8 +24,7 @@ public class UserController {
     @PostMapping("")
     public ResultData<UserVo> register(@RequestBody UserVo userVo) {
         try {
-            userService.register(userVo);
-            return ResultData.success(userVo);
+            return ResultData.success(userService.register(userVo));
         } catch (Exception e) {
             e.printStackTrace();
             return ResultData.failed(e.getMessage());

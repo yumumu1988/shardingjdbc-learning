@@ -21,7 +21,7 @@
 
 ### shardShip：业务数据库。分库、分表。shardShip1、shardShip2
 
-    CREATE TABLE `ship_1` (
+    CREATE TABLE `ships_1` (
     `ship_id` bigint(20) NOT NULL COMMENT '战舰id',
     `user_id` bigint(20) NOT NULL COMMENT '所属用户id',
     `type` int(11) NOT NULL COMMENT '战舰类型',
@@ -29,7 +29,7 @@
     `status` int(11) NOT NULL DEFAULT '1' COMMENT '战舰状态'
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='战舰信息表1';
     
-    CREATE TABLE `ship_2` (
+    CREATE TABLE `ships_2` (
     `ship_id` bigint(20) NOT NULL COMMENT '战舰id',
     `user_id` bigint(20) NOT NULL COMMENT '所属用户id',
     `type` int(11) NOT NULL COMMENT '战舰类型',
@@ -60,8 +60,18 @@
     CREATE TABLE `dictionary` (
     `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
     `type` varchar(128) COLLATE utf8mb4_bin NOT NULL COMMENT '字典类型名称',
-    `key` int(11) DEFAULT NULL COMMENT '字典键',
+    `index_key` int(11) DEFAULT NULL,
     `value` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT '字典值',
     `enable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '启用状态',
     PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='字典定义表';
+
+### 单表：logs
+
+    CREATE TABLE `logs` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增主键id',
+    `userId` bigint(20) NOT NULL DEFAULT '-1' COMMENT '用户id',
+    `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `content` varchar(255) COLLATE utf8mb4_bin NOT NULL DEFAULT '' COMMENT '操作内容',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='用户日志';
